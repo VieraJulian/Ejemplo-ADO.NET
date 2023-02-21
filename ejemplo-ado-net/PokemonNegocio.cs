@@ -21,7 +21,7 @@ namespace ejemplo_ado_net
             {
                 conexion.ConnectionString = "server=.\\SQLEXPRESS; database=POKEDEX_DB; integrated security=true";
                 comando.CommandType = System.Data.CommandType.Text;
-                comando.CommandText = "Select Numero, Nombre, Descripcion From POKEMONS";
+                comando.CommandText = "Select Numero, Nombre, Descripcion, UrlImagen From POKEMONS";
                 comando.Connection = conexion;
 
                 conexion.Open();
@@ -33,6 +33,7 @@ namespace ejemplo_ado_net
                     aux.Numero = lector.GetInt32(0);
                     aux.Nombre = (string)lector["Nombre"];
                     aux.Descripcion = (string)lector["Descripcion"];
+                    aux.urlImage = (string)lector["UrlImagen"];
 
                     lista.Add(aux);
                 }

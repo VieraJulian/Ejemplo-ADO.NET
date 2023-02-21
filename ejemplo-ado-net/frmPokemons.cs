@@ -12,6 +12,7 @@ namespace ejemplo_ado_net
 {
     public partial class frmPokemons : Form
     {
+        private List<Pokemon> listaPokemon;
         public frmPokemons()
         {
             InitializeComponent();
@@ -20,7 +21,27 @@ namespace ejemplo_ado_net
         private void frmPokemons_Load(object sender, EventArgs e)
         {
             PokemonNegocio negocio = new PokemonNegocio();
-            dgvPokemons.DataSource = negocio.listar();
+            listaPokemon = negocio.listar();
+            dgvPokemons.DataSource = listaPokemon;
+            cargarImagen(listaPokemon[0].urlImage);
+        }
+
+        private void dgvPokemons_SelectionChanged(object sender, EventArgs e)
+        {
+            Pokemon seleccionado = (Pokemon)dgvPokemons.CurrentRow.DataBoundItem;
+            cargarImagen(seleccionado.urlImage);
+        }
+
+        private void cargarImagen(string imagen)
+        {
+            try
+            {
+                pbxPokemon.Load(imagen);
+            }
+            catch (Exception ex)
+            {
+                pbxPokemon.Load("https://storage.googleapis.com/proudcity/mebanenc/uploads/2021/03/placeholder-image.png");
+            }
         }
     }
 }
