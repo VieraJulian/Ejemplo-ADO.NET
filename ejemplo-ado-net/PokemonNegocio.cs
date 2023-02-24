@@ -21,19 +21,23 @@ namespace ejemplo_ado_net
             {
                 conexion.ConnectionString = "server=.\\SQLEXPRESS; database=POKEDEX_DB; integrated security=true";
                 comando.CommandType = System.Data.CommandType.Text;
-                comando.CommandText = "Select Numero, Nombre, Descripcion, UrlImagen From POKEMONS";
+                comando.CommandText = "select POKEMONS.Numero, POKEMONS.Nombre, POKEMONS.Descripcion, POKEMONS.UrlImagen, ELEMENTOS.Descripcion Tipo, D.Descripcion Debilidad from POKEMONS inner join ELEMENTOS on POKEMONS.IdTipo = ELEMENTOS.Id inner join ELEMENTOS D on POKEMONS.IdDebilidad = D.Id";
                 comando.Connection = conexion;
 
                 conexion.Open();
                 lector = comando.ExecuteReader();
 
-                while(lector.Read())
+                while (lector.Read())
                 {
                     Pokemon aux = new Pokemon();
                     aux.Numero = lector.GetInt32(0);
                     aux.Nombre = (string)lector["Nombre"];
                     aux.Descripcion = (string)lector["Descripcion"];
                     aux.urlImage = (string)lector["UrlImagen"];
+                    aux.Tipo = new Elemento();
+                    aux.Tipo.Descripcion = (string)lector["Tipo"];
+                    aux.Debilidad = new Elemento();
+                    aux.Debilidad.Descripcion = (string)lector["Debilidad"];
 
                     lista.Add(aux);
                 }
