@@ -4,10 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Data.SqlClient;
+using dominio;
 
-namespace ejemplo_ado_net
+namespace negocio
 {
-    internal class PokemonNegocio
+    public class PokemonNegocio
     {
         public List<Pokemon> listar()
         {

@@ -3,7 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.4.33213.308
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ejemplo-ado-net", "ejemplo-ado-net\ejemplo-ado-net.csproj", "{E9702E55-0942-4C25-A32C-94204168BA57}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "winform-app", "ejemplo-ado-net\winform-app.csproj", "{E9702E55-0942-4C25-A32C-94204168BA57}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "dominio", "dominio\dominio.csproj", "{97419CF5-3352-4049-A48A-EC4634FCC110}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "negocio", "negocio\negocio.csproj", "{989FBB7E-5E2E-4854-A44D-297401455995}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +19,14 @@ Global
 		{E9702E55-0942-4C25-A32C-94204168BA57}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E9702E55-0942-4C25-A32C-94204168BA57}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E9702E55-0942-4C25-A32C-94204168BA57}.Release|Any CPU.Build.0 = Release|Any CPU
+		{97419CF5-3352-4049-A48A-EC4634FCC110}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{97419CF5-3352-4049-A48A-EC4634FCC110}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{97419CF5-3352-4049-A48A-EC4634FCC110}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{97419CF5-3352-4049-A48A-EC4634FCC110}.Release|Any CPU.Build.0 = Release|Any CPU
+		{989FBB7E-5E2E-4854-A44D-297401455995}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{989FBB7E-5E2E-4854-A44D-297401455995}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{989FBB7E-5E2E-4854-A44D-297401455995}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{989FBB7E-5E2E-4854-A44D-297401455995}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

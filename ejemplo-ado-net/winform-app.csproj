@@ -46,17 +46,23 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Elemento.cs" />
+    <Compile Include="frmElementos.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmElementos.Designer.cs">
+      <DependentUpon>frmElementos.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmPokemons.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="frmPokemons.Designer.cs">
       <DependentUpon>frmPokemons.cs</DependentUpon>
     </Compile>
-    <Compile Include="Pokemon.cs" />
-    <Compile Include="PokemonNegocio.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="frmElementos.resx">
+      <DependentUpon>frmElementos.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmPokemons.resx">
       <DependentUpon>frmPokemons.cs</DependentUpon>
     </EmbeddedResource>
@@ -81,6 +87,16 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\dominio\dominio.csproj">
+      <Project>{97419cf5-3352-4049-a48a-ec4634fcc110}</Project>
+      <Name>dominio</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\negocio\negocio.csproj">
+      <Project>{989fbb7e-5e2e-4854-a44d-297401455995}</Project>
+      <Name>negocio</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

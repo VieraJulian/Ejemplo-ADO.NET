@@ -1,10 +1,11 @@
-﻿using System;
+﻿using ejemplo_ado_net;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace ejemplo_ado_net
+namespace winform_app
 {
     internal static class Program
     {

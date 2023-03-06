@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ejemplo_ado_net
+namespace dominio
 {
-    internal class Elemento
+    public class Elemento
     {
         public int Id { get; set; }
 
