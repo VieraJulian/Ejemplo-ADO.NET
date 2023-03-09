@@ -22,6 +22,17 @@ namespace ejemplo_ado_net
 
         private void frmPokemons_Load(object sender, EventArgs e)
         {
+            cargar();
+        }
+
+        private void dgvPokemons_SelectionChanged(object sender, EventArgs e)
+        {
+            Pokemon seleccionado = (Pokemon)dgvPokemons.CurrentRow.DataBoundItem;
+            cargarImagen(seleccionado.urlImage);
+        }
+
+        private void cargar()
+        {
             PokemonNegocio negocio = new PokemonNegocio();
             try
             {
@@ -35,13 +46,6 @@ namespace ejemplo_ado_net
                 MessageBox.Show(ex.ToString());
             }
         }
-
-        private void dgvPokemons_SelectionChanged(object sender, EventArgs e)
-        {
-            Pokemon seleccionado = (Pokemon)dgvPokemons.CurrentRow.DataBoundItem;
-            cargarImagen(seleccionado.urlImage);
-        }
-
         private void cargarImagen(string imagen)
         {
             try
@@ -58,6 +62,7 @@ namespace ejemplo_ado_net
         {
             frmAltaPokemon alta = new frmAltaPokemon();
             alta.ShowDialog();
+            cargar();
         }
     }
 }
