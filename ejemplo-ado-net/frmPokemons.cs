@@ -28,7 +28,7 @@ namespace ejemplo_ado_net
         private void dgvPokemons_SelectionChanged(object sender, EventArgs e)
         {
             Pokemon seleccionado = (Pokemon)dgvPokemons.CurrentRow.DataBoundItem;
-            cargarImagen(seleccionado.urlImage);
+            cargarImagen(seleccionado.UrlImagen);
         }
 
         private void cargar()
@@ -38,8 +38,8 @@ namespace ejemplo_ado_net
             {
                 listaPokemon = negocio.listar();
                 dgvPokemons.DataSource = listaPokemon;
-                dgvPokemons.Columns["urlImage"].Visible = false;
-                cargarImagen(listaPokemon[0].urlImage);
+                dgvPokemons.Columns["urlImagen"].Visible = false;
+                cargarImagen(listaPokemon[0].UrlImagen);
             }
             catch (Exception ex)
             {
