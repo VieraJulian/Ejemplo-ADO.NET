@@ -22,7 +22,7 @@ namespace negocio
             {
                 conexion.ConnectionString = "server=.\\SQLEXPRESS; database=POKEDEX_DB; integrated security=true";
                 comando.CommandType = System.Data.CommandType.Text;
-                comando.CommandText = "select POKEMONS.Numero, POKEMONS.Nombre, POKEMONS.Descripcion, POKEMONS.UrlImagen, ELEMENTOS.Descripcion Tipo, D.Descripcion Debilidad, POKEMONS.IdTipo, POKEMONS.IdDebilidad, POKEMONS.Id  from POKEMONS inner join ELEMENTOS on POKEMONS.IdTipo = ELEMENTOS.Id inner join ELEMENTOS D on POKEMONS.IdDebilidad = D.Id;\r\n                ";
+                comando.CommandText = "select POKEMONS.Numero, POKEMONS.Nombre, POKEMONS.Descripcion, POKEMONS.UrlImagen, ELEMENTOS.Descripcion Tipo, D.Descripcion Debilidad, POKEMONS.IdTipo, POKEMONS.IdDebilidad, POKEMONS.Id  from POKEMONS inner join ELEMENTOS on POKEMONS.IdTipo = ELEMENTOS.Id inner join ELEMENTOS D on POKEMONS.IdDebilidad = D.Id where Activo = 1;";
                 comando.Connection = conexion;
 
                 conexion.Open();
@@ -113,6 +113,21 @@ namespace negocio
             {
                 AccesoDatos datos = new AccesoDatos();
                 datos.setearConsulta("delete from POKEMONS where id = @id");
+                datos.setearParametro("@id", id);
+                datos.ejecutarAccion();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public void eliminarLogico(int id)
+        {
+            try
+            {
+                AccesoDatos datos = new AccesoDatos();
+                datos.setearConsulta("update POKEMONS set Activo = 0 where id = @id");
                 datos.setearParametro("@id", id);
                 datos.ejecutarAccion();
             }
