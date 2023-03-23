@@ -27,8 +27,11 @@ namespace ejemplo_ado_net
 
         private void dgvPokemons_SelectionChanged(object sender, EventArgs e)
         {
-            Pokemon seleccionado = (Pokemon)dgvPokemons.CurrentRow.DataBoundItem;
-            cargarImagen(seleccionado.UrlImagen);
+            if (dgvPokemons.CurrentRow != null)
+            {
+                Pokemon seleccionado = (Pokemon)dgvPokemons.CurrentRow.DataBoundItem;
+                cargarImagen(seleccionado.UrlImagen);
+            }
         }
 
         private void cargar()
@@ -38,14 +41,19 @@ namespace ejemplo_ado_net
             {
                 listaPokemon = negocio.listar();
                 dgvPokemons.DataSource = listaPokemon;
-                dgvPokemons.Columns["urlImagen"].Visible = false;
-                dgvPokemons.Columns["Id"].Visible = false;
+                ocultarColumnas();
                 cargarImagen(listaPokemon[0].UrlImagen);
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.ToString());
             }
+        }
+
+        private void ocultarColumnas()
+        {
+            dgvPokemons.Columns["urlImagen"].Visible = false;
+            dgvPokemons.Columns["Id"].Visible = false;
         }
         private void cargarImagen(string imagen)
         {
@@ -112,6 +120,25 @@ namespace ejemplo_ado_net
             {
                 MessageBox.Show(ex.ToString());
             }
+        }
+
+        private void btnFiltro_Click(object sender, EventArgs e)
+        {
+            List<Pokemon> listaFiltrada;
+            string filtro = txtFiltro.Text;
+
+            if (filtro != "")
+            {
+                listaFiltrada = listaPokemon.FindAll(p => p.Nombre.ToUpper().Contains(filtro.ToUpper()) || p.Tipo.Descripcion.ToUpper().Contains(filtro.ToUpper()));
+            }
+            else
+            {
+                listaFiltrada = listaPokemon;
+            }
+
+            dgvPokemons.DataSource = null;
+            dgvPokemons.DataSource = listaFiltrada;
+            ocultarColumnas();
         }
     }
 }
