@@ -136,5 +136,91 @@ namespace negocio
                 throw ex;
             }
         }
+
+        public List<Pokemon> filtrar(string campo, string criterio, string filtro)
+        {
+            List<Pokemon> lista = new List<Pokemon>();
+            AccesoDatos datos = new AccesoDatos();
+            try
+            {
+                string consulta = "select POKEMONS.Numero, POKEMONS.Nombre, POKEMONS.Descripcion, POKEMONS.UrlImagen, ELEMENTOS.Descripcion Tipo, D.Descripcion Debilidad, POKEMONS.IdTipo, POKEMONS.IdDebilidad, POKEMONS.Id  from POKEMONS inner join ELEMENTOS on POKEMONS.IdTipo = ELEMENTOS.Id inner join ELEMENTOS D on POKEMONS.IdDebilidad = D.Id where Activo = 1 AND  ";
+
+                if (campo == "Número")
+                {
+                    switch (criterio)
+                    {
+                        case "Mayor a":
+                            consulta += "Numero > " + filtro;
+                            break;
+                        case "Menor a":
+                            consulta += "Numero < " + filtro;
+                            break;
+                        default:
+                            consulta += "Numero = " + filtro;
+                            break;
+                    }
+                } 
+                else if (campo == "Nombre")
+                {
+                    switch (criterio)
+                    {
+                        case "Comienza con":
+                            consulta += "Nombre like '" + filtro + "%'";
+                            break;
+                        case "Termina con":
+                            consulta += "Nombre like '%" + filtro + "'";
+                            break;
+                        default:
+                            consulta += "Nombre like '%" + filtro + "%'";
+                            break;
+                    }
+                }
+                else
+                {
+                    switch (criterio)
+                    {
+                        case "Comienza con":
+                            consulta += "Descripcion like '" + filtro + "%'";
+                            break;
+                        case "Termina con":
+                            consulta += "Descripcion like '%" + filtro + "'";
+                            break;
+                        default:
+                            consulta += "Descripcion like '%" + filtro + "%'";
+                            break;
+                    }
+                }
+
+                datos.setearConsulta(consulta);
+                datos.ejecutarLectura();
+
+                while (datos.Lector.Read())
+                {
+                    Pokemon aux = new Pokemon();
+                    aux.Id = (int)datos.Lector["Id"];
+                    aux.Numero = datos.Lector.GetInt32(0);
+                    aux.Nombre = (string)datos.Lector["Nombre"];
+                    aux.Descripcion = (string)datos.Lector["Descripcion"];
+                    if (!(datos.Lector["UrlImagen"] is DBNull))
+                    {
+                        aux.UrlImagen = (string)datos.Lector["UrlImagen"];
+                    }
+                    aux.Tipo = new Elemento();
+                    aux.Tipo.Id = (int)datos.Lector["idTipo"];
+                    aux.Tipo.Descripcion = (string)datos.Lector["Tipo"];
+                    aux.Debilidad = new Elemento();
+                    aux.Debilidad.Id = (int)datos.Lector["idDebilidad"];
+                    aux.Debilidad.Descripcion = (string)datos.Lector["Debilidad"];
+
+                    lista.Add(aux);
+                }
+
+                return lista;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
     }
 }
