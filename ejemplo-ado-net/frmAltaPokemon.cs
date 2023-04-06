@@ -3,18 +3,22 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using dominio;
 using negocio;
+using System.Configuration;
 
 namespace ejemplo_ado_net
 {
     public partial class frmAltaPokemon : Form
     {
         private Pokemon pokemon = null;
+
+        private OpenFileDialog archivo = null;
         public frmAltaPokemon()
         {
             InitializeComponent();
@@ -58,6 +62,12 @@ namespace ejemplo_ado_net
                 {
                     negocio.agregar(pokemon);
                     MessageBox.Show("Agregado exitosamente");
+                }
+
+                // Guardo la imagen si la levantó localmente:
+                if (archivo != null && !(txtUrlImagen.Text.ToUpper().Contains("HTTP")))
+                {
+                    File.Copy(archivo.FileName, ConfigurationManager.AppSettings["images-folder"] + archivo.SafeFileName);
                 }
 
                 Close();
@@ -113,6 +123,17 @@ namespace ejemplo_ado_net
             catch (Exception ex)
             {
                 pbxPokemon.Load("https://storage.googleapis.com/proudcity/mebanenc/uploads/2021/03/placeholder-image.png");
+            }
+        }
+
+        private void btnAgregarImagen_Click(object sender, EventArgs e)
+        {
+            archivo = new OpenFileDialog();
+            archivo.Filter = "jpg|*.jpg;|png|*.png";
+            if (archivo.ShowDialog() == DialogResult.OK)
+            {
+                txtUrlImagen.Text = archivo.FileName;
+                cargarImagen(archivo.FileName);
             }
         }
     }
